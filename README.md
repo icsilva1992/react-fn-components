@@ -1,4 +1,4 @@
-# Exercício de React - Function Components
+# Exercício de React - Function Components (Solucionado)
 
 ## Getting Started with Create React App
 
