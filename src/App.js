@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import Dog from "./Dog";
 
-function App() {
+
+const App = () => {
+
+  const [breeds, setBreeds] = useState([])
+  const ALL_BREEDS = 'https://dog.ceo/api/breeds/list/all'
+
+  const allBreeds = () => {
+    axios.get(ALL_BREEDS).then(res => setBreeds(Object.keys(res.data.message)))
+  }
+
+  useEffect(() => {
+    allBreeds()
+  },[])
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {breeds.map((breed, i) => 
+        i < 10 && (
+          <Dog key={i} dogBreed={breed} />
+        )
+      )}
+    </>
   );
 }
 
